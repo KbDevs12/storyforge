@@ -1,0 +1,32 @@
+{
+  "name": "storyforge",
+  "version": "1.0.0",
+  "description": "discord bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "prisma": "prisma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kbdevs12/storyforge.git"
+  },
+  "author": "KbDevs12",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kbdevs12/storyforge/issues"
+  },
+  "homepage": "https://github.com/kbdevs12/storyforge#readme",
+  "dependencies": {
+    "@prisma/client": "^6.16.1",
+    "discord.js": "^14.22.1",
+    "dotenv": "^17.2.2",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "eslint": "^9.35.0",
+    "prisma": "^6.16.1"
+  }
+}

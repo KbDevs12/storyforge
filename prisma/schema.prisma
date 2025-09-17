@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model achievements {
+  id                Int                         @id @default(autoincrement()) @db.UnsignedInt
+  name              String                      @db.VarChar(100)
+  description       String?                     @db.Text
+  condition_type    achievements_condition_type
+  condition_value   Int
+  user_achievements user_achievements[]
+}
+
+model items {
+  id          BigInt  @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  theme_id    Int?
+  type        String? @db.VarChar(50)
+  name        String? @db.VarChar(255)
+  rarity      String? @db.VarChar(50)
+  description String? @db.Text
+}
+
+model servers {
+  id         BigInt    @id
+  name       String?   @db.VarChar(255)
+  theme_id   Int?
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model stories {
+  id         BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  server_id  BigInt?
+  theme_id   Int?
+  month      Int?
+  year       Int?
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model story_entries {
+  id           BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  story_id     Int?
+  user_id      BigInt?
+  content      String?   @db.Text
+  used_item_id Int?
+  created_at   DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model themes {
+  id          BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  server_id   BigInt?
+  name        String?   @db.VarChar(100)
+  description String?   @db.Text
+  created_at  DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model trades {
+  id         BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  server_id  BigInt?
+  from_user  BigInt?
+  to_user    BigInt?
+  item_id    Int?
+  status     String?   @default("pending") @db.VarChar(50)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model user_achievements {
+  user_id        String       @db.VarChar(50)
+  server_id      String       @db.VarChar(50)
+  achievement_id Int          @db.UnsignedInt
+  earned_at      DateTime?    @default(now()) @db.Timestamp(0)
+  achievements   achievements @relation(fields: [achievement_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_achievements_ibfk_1")
+
+  @@id([user_id, server_id, achievement_id])
+  @@index([achievement_id], map: "achievement_id")
+}
+
+model user_items {
+  id          BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  user_id     BigInt?
+  server_id   BigInt?
+  item_id     Int?
+  obtained_at DateTime? @default(now()) @db.Timestamp(0)
+
+  @@unique([user_id, server_id, item_id, obtained_at], map: "user_id")
+}
+
+enum achievements_condition_type {
+  loot_count
+  story_count
+  rare_item
+}
