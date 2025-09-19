@@ -1,0 +1,10 @@
+{
+  "clientId": "",
+  "guildId": "",
+  "autoRegisterCommands": true,
+  "embedColor": "#7289DA",
+  "footerText": "StoryForge Bot",
+  "lootMode": "per-server",
+  "inviteLink": "",
+  "ownerId": ""
+}

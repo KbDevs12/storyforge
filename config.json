@@ -3,5 +3,8 @@
   "guildId": "717166064282370058",
   "autoRegisterCommands": true,
   "embedColor": "#7289DA",
-  "footerText": "StoryForge Bot"
+  "footerText": "StoryForge Bot",
+  "lootMode": "per-server",
+  "inviteLink": "https://discord.com/oauth2/authorize?client_id=1417113645497979051&permissions=2262386572983376&integration_type=0&scope=applications.commands+bot",
+  "ownerId": "698069399285792848"
 }

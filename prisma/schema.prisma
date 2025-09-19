@@ -24,6 +24,8 @@ model items {
   name        String? @db.VarChar(255)
   rarity      String? @db.VarChar(50)
   description String? @db.Text
+
+  user_items user_items[]
 }
 
 model servers {
@@ -84,8 +86,10 @@ model user_items {
   id          BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
   user_id     BigInt?
   server_id   BigInt?
-  item_id     Int?
+  item_id     BigInt?
   obtained_at DateTime? @default(now()) @db.Timestamp(0)
+
+  item items? @relation(fields: [item_id], references: [id])
 
   @@unique([user_id, server_id, item_id, obtained_at], map: "user_id")
 }

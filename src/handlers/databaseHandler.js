@@ -83,12 +83,12 @@ module.exports = async (client) => {
         },
         update: {
           name: serverName,
-          theme_id: themeId,
+          theme_id: themeId ? Number(themeId) : null,
         },
         create: {
           id: BigInt(serverId),
           name: serverName,
-          theme_id: themeId,
+          theme_id: themeId ? Number(themeId) : null,
         },
       });
     } catch (error) {
@@ -140,7 +140,7 @@ module.exports = async (client) => {
         data: {
           user_id: BigInt(userId),
           server_id: BigInt(serverId),
-          item_id: itemId,
+          item_id: Number(itemId),
         },
       });
     } catch (error) {

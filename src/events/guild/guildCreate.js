@@ -1,10 +1,11 @@
 module.exports = {
   name: "guildCreate",
   once: false,
-  execute(guild, client) {
+  async execute(guild, client) {
     console.log(`Bot joined a new guild: ${guild.name} (${guild.id})`);
 
     try {
+      await client.createOrUpdateServer(guild.id, guild.name);
       const defaultChannel = guild.channels.cache.find(
         (channel) =>
           channel.type === "GUILD_TEXT" &&

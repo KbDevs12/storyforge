@@ -6,6 +6,7 @@ module.exports = {
     .setName("ping")
     .setDescription("Check the bot's response time"),
   usage: "/ping",
+  category: "Utility",
 
   async execute(interaction, client) {
     try {

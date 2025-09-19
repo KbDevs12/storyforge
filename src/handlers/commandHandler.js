@@ -20,6 +20,8 @@ module.exports = (client) => {
         const command = require(filePath);
 
         if ("data" in command && "execute" in command) {
+          if (!command.category) command.category = folder;
+          if (!command.usage) command.usage = `/${command.data.name}`;
           client.commands.set(command.data.name, command);
           console.log(`Loaded command: ${command.data.name}`);
         } else {
